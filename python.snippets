@@ -1,0 +1,29 @@
+# Python3 {{{
+snippet she "Shebang header for python scripts" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+$0
+endsnippet
+
+snippet print "print 3" b
+print($0)
+endsnippet 
+#}}}
+
+# Django {{{
+snippet dclass "Django Models (class)" b
+class ${1:model}(models.Model):
+    ${2:name} = models.CharField(max_length=128)
+    # ...
+    
+    def __str__(self):
+        return self.${2:name}
+    
+    class Meta:
+        #abstract = True
+        ordering = ["${2:name}"]
+        verbose_name_plural = "${1//$0/}"
+endsnippet
+
+#}}}
+
