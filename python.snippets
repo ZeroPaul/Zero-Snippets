@@ -18,6 +18,9 @@ class ${1:model}(models.Model):
     
     def __str__(self):
         return self.${2:name}
+
+    def get_absolute_url(self):
+        return reverse('name_url', kwargs={'pk': self.pk})
     
     class Meta:
         #abstract = True
@@ -60,11 +63,13 @@ snippet dcbviewsuper "Django View CBV Super" b
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
-from .models import ${1:ModelName} 
+from .models import ${1:ModelName}
+#from .forms import ${1//$0/}CreateForm, ${1//$0/}UpdateForm
 
 class ${1//$0/}CreateView( CreateView):
     model = ${1//$0/}
     fields = ['name_field', '']
+    #form_class = ${1//$0/}CreateForm #Only Forms
 
 class ${1//$0/}ListView(ListView):
     model = ${1//$0/}
@@ -77,7 +82,7 @@ class ${1//$0/}ListView(ListView):
         
         if q:
             # Return a filtered queryset
-            return queryset.filter(title__icontains=q)
+            return queryset.filter(name_field__icontains=q)
         # Return the base queryset
         return queryset
 
@@ -90,6 +95,7 @@ class ${1//$0/}ResultsView(${1//$0/}DetailView):
 class ${1//$0/}UpdateView(UpdateView):
     model = ${1//$0/}
     fields = ['name_field', '']
+    #form_class = ${1//$0/}UpdateForm #Only Forms
 
     def get_success_url(self):
         return reverse('Name App:detail', kwargs={'pk': self.object.pk})
@@ -154,3 +160,120 @@ endsnippet
 
 #}}}
 
+# Django Rest {{{
+
+snippet rmodels "DjangoRest Model" b
+import uuid as uuid_lib
+from django.utils.encoding import python_2_unicode_compatible
+
+from django.db import models
+from django.urls import reverse
+
+@python_2_unicode_compatible # For Python 3.5+ and 2.7
+class ${1:ModelName}(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    # Used to find the web URL
+    uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+    
+    def __str__(self):
+        #return self.title
+        return str(self.title)
+
+    def get_absolute_url(self):
+        return reverse('name_url', kwargs={'slug': self.slug})
+    
+    class Meta:
+        #abstract = True
+        ordering = ["${2:name}"]
+        verbose_name_plural = "${1//$0/}"
+    
+endsnippet
+
+snippet rserializers "DjangoRest Serializers" b
+from rest_framework import serializers
+
+from ..models import ${1:ModelName}
+
+class ${1//$0/}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = ${1//$0/}
+        fields = ['uuid', 'slug',]
+
+endsnippet
+
+snippet rviews "DjangoRest Views" b
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView
+)
+from rest_framework.permissions import IsAuthenticated
+
+from ..models import ${1:ModelName}
+from .serializers import ${1//$0/}Serializer
+
+class ${1//$0/}ListCreateAPIView(ListCreateAPIView):
+    queryset = ${1//$0/}.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = ${1//$0/}Serializer
+    lookup_field = 'uuid' # Don't use ${1//$0/}.id!
+
+class ${1//$0/}RetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ${1//$0/}.objects.all()
+    permission_classes = (IsAuthenticated, )
+    serializer_class = ${1//$0/}Serializer
+    lookup_field = 'uuid' # Don't use ${1//$0/}.id!
+
+endsnippet
+
+snippet rurls "DjangoRest urls" b
+from django.conf.urls import url
+
+from ${1/\w+\s*/\l$0/g}s.api import views
+
+# Model -> ${1:ModelName}
+
+urlpatterns = [
+    # / ${1/\w+\s*/\l$0/g}s/api/
+    url(
+        regex=r'^api/$',
+        view=views.${1/\w+\s*/\u$0/g}ListCreateAPIView.as_view(),
+        name='${1/\w+\s*/\l$0/g}_rest_api'
+    ),
+    # /${1/\w+\s*/\l$0/g}s/api/:slug/
+    url(
+        regex=r'^api/(?P<uuid>[-\w]+)/$',
+        view=views.${1/\w+\s*/\u$0/g}RetrieveUpdateDestroyAPIView.as_view(),
+        name='${1/\w+\s*/\l$0/g}_rest_api'
+    )
+]
+
+endsnippet
+
+# snippet radmin "DjangoRest Admin"
+# from django.contrib import admin
+# from django.urls import reverse, NoReverseMatch
+# from django.utils.html import format_html
+
+# from .models import IceCreamBar
+
+# @admin.register(IceCreamBar)
+# class IceCreamBarModelAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'shell', 'filling')
+#     readonly_fields = ('show_url',)
+#     def show_url(self, instance):
+#         url = reverse('ice_cream_bar_detail', kwargs={'pk': instance.pk})
+#         response = format_html("""<a href="{0}">{0}</a>""", url)
+#         return response
+#     show_url.short_description = 'Ice Cream Bar URL'
+#     # Displays HTML tags
+#     # Never set allow_tags to True against user submitted data!!!
+#     show_url.allow_tags = True
+# endsnippet
+
+# }}}
+
+# Test {{{
+
+
+# }}}
