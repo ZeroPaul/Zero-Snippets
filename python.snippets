@@ -25,5 +25,132 @@ class ${1:model}(models.Model):
         verbose_name_plural = "${1//$0/}"
 endsnippet
 
+snippet dchoice "Django Simple Choice" b
+${1:ChoiceName} = (
+    ("fn", "full name")
+)
+choice = models.CharField(max_length=2, choices=${1//$0/}, default="fn")
+endsnippet
+
+snippet dchoicesuper "Django Super Choice" b
+#pip install enum34
+#from enum import Enum
+class ${1:CHOICENAME}(Enum):
+    name = ('fn', 'Full Name')
+    #...
+    @classmethod
+    def get_value(cls, member):
+        return cls[member].value[0]
+choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
+
+endsnippet
+
+snippet dcbviewsimple "Django View CBV Simple" b
+#from django.http import HttpResponse
+#from django.views.generic import View
+
+class ${1: Name}View(View):
+    def get(self, request, *args, **kwargs):
+        # Business logic goes here
+        return HttpResponse('CBV')
+
+endsnippet 
+
+snippet dcbviewsuper "Django View CBV Super" b
+from django.urls import reverse
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
+
+from .models import ${1:ModelName} 
+
+class ${1//$0/}CreateView( CreateView):
+    model = ${1//$0/}
+    fields = ['name_field', '']
+
+class ${1//$0/}ListView(ListView):
+    model = ${1//$0/}
+
+    def get_queryset(self):
+        # Fetch the queryset from the parent get_queryset
+        queryset = super(${1//$0/}ListView, self).get_queryset()
+        # Get the q GET parameter
+        q = self.request.GET.get("q")
+        
+        if q:
+            # Return a filtered queryset
+            return queryset.filter(title__icontains=q)
+        # Return the base queryset
+        return queryset
+
+class ${1//$0/}DetailView(DetailView):
+    model = ${1//$0/}
+
+class ${1//$0/}ResultsView(${1//$0/}DetailView):
+    template_name = 'Name App/results.html'
+
+class ${1//$0/}UpdateView(UpdateView):
+    model = ${1//$0/}
+    fields = ['name_field', '']
+
+    def get_success_url(self):
+        return reverse('Name App:detail', kwargs={'pk': self.object.pk})
+
+endsnippet
+
+snippet dcbvurl "Django URL CBV"
+from django.conf.urls import url
+
+from . import views #Best Practice
+#from .views import ${1//$0/}ListView, ${1//$0/}DetailView,
+#                   ${1//$0/}ResultsView, ${1//$0/}UpdateView
+
+urlpatterns = [
+    url(
+        regex=r'^$',
+        view=views.${1:ModelName}ListView.as_view(),
+        name='list'
+    ),
+    url(
+        regex=r'^(?P<pk>\d+)/$',
+        view=views.${1//$0/}DetailView.as_view(),
+        name='detail'
+    ),
+    url(
+        regex=r'^(?P<pk>\d+)/results/$',
+        view=views.${1//$0/}ResultsView.as_view(),
+        name='results'
+    ),
+    url(
+        regex=r'^(?P<pk>\d+)/update/$',
+        view=views.${1//$0/}UpdateView.as_view(),
+        name='update'
+    )
+]
+
+endsnippet
+
+snippet dsurl "Django URL settings root" b
+urlpatterns += [
+    url(r'^${1: NameApp}/', include('${1//$0/}.urls', namespace='${1//$0/}')),
+]
+
+endsnippet
+
+snippet dvalidators "Django Validators" b
+# core/validators.py
+from django.core.exceptions import ValidationError
+
+def validate_${1:name}(value):
+    """Raise a ValidationError if the value doesn't start with the
+        word '${1//$0/}'.
+    """
+    if not value.startswith('${1//$0/}'):
+        msg = 'Must start with ${1//$0/}'
+        raise ValidationError(msg)
+   #Usage
+   #from .validators import validate_${1//$0/}
+   #title = models.CharField(max_length=255, validators=[validate_${1//$0/}])
+
+endsnippet
+
 #}}}
 
