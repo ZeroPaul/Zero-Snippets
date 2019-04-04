@@ -1,13 +1,21 @@
 # Python3 {{{
 snippet she "Shebang header for python scripts" b
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 $0
 endsnippet
 
-snippet print "print 3" b
+snippet print "print py3" b
 print($0)
-endsnippet 
+endsnippet
+
+snippet inputb "input py3"
+${1: input_name} = input()
+endsnippet
+
+snippet str "string py3"
+str(${1:Name})
+endsnippet
 #}}}
 
 # Django {{{
@@ -175,19 +183,19 @@ class ${1:ModelName}(models.Model):
     slug = models.SlugField(unique=True)
     # Used to find the web URL
     uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+
+    class Meta:
+        #abstract = True
+        ordering = ["${2:title}"]
+        verbose_name = "${1//$0/}"
+        verbose_name_plural = "${1//$0/}s"
     
     def __str__(self):
-        #return self.title
         return str(self.title)
 
     def get_absolute_url(self):
         return reverse('name_url', kwargs={'slug': self.slug})
-    
-    class Meta:
-        #abstract = True
-        ordering = ["${2:name}"]
-        verbose_name_plural = "${1//$0/}"
-    
+
 endsnippet
 
 snippet rserializers "DjangoRest Serializers" b
@@ -274,6 +282,11 @@ endsnippet
 # }}}
 
 # Test {{{
-
+snippet letter
+Dear $1,
+$0
+Yours sincerely,
+$2
+endsnippet
 
 # }}}
