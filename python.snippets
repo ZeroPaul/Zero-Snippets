@@ -2,6 +2,7 @@
 snippet she "Shebang header for python scripts" b
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 $0
 endsnippet
 
@@ -10,7 +11,7 @@ print($0)
 endsnippet
 
 snippet inputb "input py3"
-${1: input_name} = input()
+${1:input_name} = input()
 endsnippet
 
 snippet strb "string py3"
@@ -18,11 +19,19 @@ str(${1:Name})
 endsnippet
 
 snippet forb "for with range py3"
-for i in range(${1:Value}):
+for ${1:Iteration} in range(${2:Value}):
     pass
 endsnippet
 snippet lenb "len py3"
 len(${1:Name})
+endsnippet
+
+snippet openb "open py3"
+open(${1:ValueOne}, ${2:ValueTwo})
+endsnippet
+
+snippet skey " Super Key = Value py3"
+${1:NameKey} = ${2:NameContent}
 endsnippet
 
 #}}}
@@ -34,14 +43,14 @@ class ${1:model}(models.Model):
     # ...
     
     def __str__(self):
-        return self.${2:name}
+        return self.${2//$0/}
 
     def get_absolute_url(self):
         return reverse('name_url', kwargs={'pk': self.pk})
     
     class Meta:
         #abstract = True
-        ordering = ["${2:name}"]
+        ordering = ["${2//$0/}"]
         verbose_name_plural = "${1//$0/}"
 endsnippet
 
