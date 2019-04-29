@@ -14,9 +14,7 @@ snippet inputb "input py3"
 ${1:input_name} = input()
 endsnippet
 
-snippet strb "string py3"
-str(${1:Name})
-endsnippet
+
 
 snippet forb "for with range py3"
 for ${1:Iteration} in range(${2:Value}):
@@ -30,9 +28,69 @@ snippet openb "open py3"
 open(${1:ValueOne}, ${2:ValueTwo})
 endsnippet
 
-snippet skey " Super Key = Value py3"
-${1:NameKey} = ${2:NameContent}
+
+#Variables assignment {{{
+
+snippet varb "Only varible py3"
+${1: Name_Varible} = ${2:Value}
 endsnippet
+
+snippet varm+ "Multiple variable py3"
+
+endsnippet
+                          
+snippet varIn "Increment += py3"
+${1: Name_Varible} += ${2:Value}    
+endsnippet
+
+snippet varDe "Decrement -= py3"
+${1: Name_Varible} -= ${2:Value}    
+endsnippet
+
+#}}}
+
+#Type conversions {{{
+
+snippet int "Integer / conversions py3"
+int(${1:Variable})
+endsnippet
+
+snippet intb "Integer base in parameter / conversions py3"
+int(${1:Variable}, ${2:BaseIN})
+
+endsnippet
+snippet float "Float py3"
+int(${1:Variable})
+endsnippet
+
+snippet rounde "Round / conversions py3"
+round(${1:Variable}, ${2:NumberDecimal})
+endsnippet
+
+snippet bool "Bool / conversions py3"
+bool(${1:Variable})
+endsnippet
+
+snippet str "String / conversions py3"
+str(${1:Variable})
+endsnippet
+
+snippet list "List / conversions py3"
+list(${1:Variable})
+# list("abc") -> ['a','b','c']
+endsnippet
+
+snippet dict "Dicctionary / conversions py3"
+dict(${1:Variable})
+# dict([(3, "three"), (1, "one")]) -> {1: 'one', 3: 'three'}
+endsnippet
+
+snippet set "Set / conversions py3"
+set(${1:Variable})
+# set(["one", "two"]) -> {'one', 'two'}
+endsnippet
+
+#}}}
 
 #}}}
 
