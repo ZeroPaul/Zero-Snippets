@@ -1,26 +1,24 @@
 # Python3 {{{
-snippet she "Shebang header for python scripts" b
+snippet she "Shebang header for python scripts py3" b
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 $0
 endsnippet
 
-snippet print "print py3" b
+snippet pri "print py3" b
 print($0)
 endsnippet
 
-snippet inputb "input py3"
-${1:input_name} = input()
+snippet inp "input py3"
+input(${1:Instrucction})
 endsnippet
-
-
 
 snippet forb "for with range py3"
 for ${1:Iteration} in range(${2:Value}):
-    pass
+    ${0:pass}
 endsnippet
-snippet lenb "len py3"
+snippet len "len py3"
 len(${1:Name})
 endsnippet
 
@@ -31,7 +29,7 @@ endsnippet
 
 #Variables assignment {{{
 
-snippet varb "Only varible py3"
+snippet var "Only varible py3"
 ${1: Name_Varible} = ${2:Value}
 endsnippet
 
@@ -39,11 +37,11 @@ snippet varm+ "Multiple variable py3"
 
 endsnippet
                           
-snippet varIn "Increment += py3"
+snippet vai "Increment += py3"
 ${1: Name_Varible} += ${2:Value}    
 endsnippet
 
-snippet varDe "Decrement -= py3"
+snippet vad "Decrement -= py3"
 ${1: Name_Varible} -= ${2:Value}    
 endsnippet
 
@@ -59,15 +57,15 @@ snippet intb "Integer base in parameter / conversions py3"
 int(${1:Variable}, ${2:BaseIN})
 
 endsnippet
-snippet float "Float py3"
+snippet flo "Float py3"
 int(${1:Variable})
 endsnippet
 
-snippet rounde "Round / conversions py3"
+snippet rou "Round / conversions py3"
 round(${1:Variable}, ${2:NumberDecimal})
 endsnippet
 
-snippet bool "Bool / conversions py3"
+snippet boo "Bool / conversions py3"
 bool(${1:Variable})
 endsnippet
 
@@ -75,12 +73,12 @@ snippet str "String / conversions py3"
 str(${1:Variable})
 endsnippet
 
-snippet list "List / conversions py3"
+snippet lis "List / conversions py3"
 list(${1:Variable})
 # list("abc") -> ['a','b','c']
 endsnippet
 
-snippet dict "Dicctionary / conversions py3"
+snippet dic "Dicctionary / conversions py3"
 dict(${1:Variable})
 # dict([(3, "three"), (1, "one")]) -> {1: 'one', 3: 'three'}
 endsnippet
