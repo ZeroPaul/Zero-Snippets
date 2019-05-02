@@ -28,6 +28,11 @@ snippet openb "open py3"
 open(${1:ValueOne}, ${2:ValueTwo})
 endsnippet
 
+snippet rrs
+    def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+		"""${3:docstring for $1}"""
+		${0}
+endsnippet
 
 #Variables assignment {{{
 
