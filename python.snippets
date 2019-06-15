@@ -93,10 +93,13 @@ endsnippet
 #}}}
 
 # Django {{{
+
+# Models {{{
+
 snippet dclass "Django Models (class)" b
 class ${1:model}(models.Model):
-    ${2:name} = models.CharField(max_length=128)
-    # ...
+    ${2:name} = models.CharField(max_length=${3:Value})
+    $0
     
     def __str__(self):
         return self.${2//$0/}
@@ -106,18 +109,48 @@ class ${1:model}(models.Model):
     
     class Meta:
         #abstract = True
-        ordering = ["${2//$0/}"]
-        verbose_name_plural = "${1//$0/}"
+        ordering = ('${2//$0/}',)
+        verbose_name_plural = '${1//$0/}'
 endsnippet
 
-snippet dchoice "Django Simple Choice" b
+# }}}
+
+# Fields {{{
+snippet mslug "Django Model Field Slug"
+${1:Name} = models.SlugField(max_length=${2:Value}, unique_for_date='${3:Field}')
+endsnippet
+
+snippet mforeingKey "Django Model Field ForeingKey"
+${1:Name} = models.ForeignKey(User, on_delete=models.CASCADE, \
+							  related_name='${2:ReName}')
+endsnippet
+
+snippet mchar "Django Model Field Char"
+${1:Name} = models.CharField(max_length=${2:Value})
+endsnippet
+
+snippet mtext "Django Model Field Text"
+${1:Name} = models.TextField()
+endsnippet
+
+snippet mdateTime "Django Model Field DateTime"
+${1:Name} = models.DateTimeField( \
+								${2}#default=timezone.now \
+								#auto_now_add=True \
+								#auto_now=True \
+								)
+endsnippet
+
+snippet mchoice "Django Model Field Simple Choice" b
 ${1:ChoiceName} = (
-    ("fn", "full name")
+    ('${2:Key}', '${3:Value}'),
 )
-choice = models.CharField(max_length=2, choices=${1//$0/}, default="fn")
+${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
+							default='${2//$0/}')
+$0
 endsnippet
 
-snippet dchoicesuper "Django Super Choice" b
+snippet mchoicesuper "Django Super Choice" b
 #pip install enum34
 #from enum import Enum
 class ${1:CHOICENAME}(Enum):
@@ -127,8 +160,12 @@ class ${1:CHOICENAME}(Enum):
     def get_value(cls, member):
         return cls[member].value[0]
 choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
-
+$0
 endsnippet
+
+# }}}
+
+# View {{{
 
 snippet dcbviewsimple "Django View CBV Simple" b
 #from django.http import HttpResponse
@@ -139,7 +176,7 @@ class ${1: Name}View(View):
         # Business logic goes here
         return HttpResponse('CBV')
 
-endsnippet 
+endsnippet
 
 snippet dcbviewsuper "Django View CBV Super" b
 from django.urls import reverse
@@ -184,6 +221,10 @@ class ${1//$0/}UpdateView(UpdateView):
 
 endsnippet
 
+# }}}
+
+# Urls {{{
+
 snippet dcbvurl "Django URL CBV"
 from django.conf.urls import url
 
@@ -223,6 +264,10 @@ urlpatterns += [
 
 endsnippet
 
+# }}}
+
+# Validators {{{
+
 snippet dvalidators "Django Validators" b
 # core/validators.py
 from django.core.exceptions import ValidationError
@@ -239,6 +284,17 @@ def validate_${1:name}(value):
    #title = models.CharField(max_length=255, validators=[validate_${1//$0/}])
 
 endsnippet
+
+# }}}
+
+# Admin {{{
+
+snippet dadminRegister "Django Admin Register"
+	
+admin.site.register(${1:NameModel})
+
+endsnippet
+# }}}
 
 #}}}
 
