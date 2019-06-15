@@ -294,6 +294,17 @@ snippet dadminRegister "Django Admin Register"
 admin.site.register(${1:NameModel})
 
 endsnippet
+
+snippet adminClass "Django Admin Class"
+@admin.register(${1:NameApp})
+class ${1//$0/}Admin(admin.ModelAdmin):
+	list_display= (${2:Fields})
+	list_filter	=	('status',	'created',	'publish',	'author')
+	search_fields	=	('title',	'body')
+	prepopulated_fields	=  {${:Name}} #{'slug':	('title',)}
+	raw_id_fields	= ('${:Name}',)
+	date_hierarchy	= '${:Name}'#'publish'
+endsnippet
 # }}}
 
 #}}}
