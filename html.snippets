@@ -1,0 +1,30 @@
+snippet textends "Django Templates Extends" 
+{% extends "${1:NameApp}/base.html" %}
+endsnippet
+
+snippet tinclude "Django Templates Include" 
+{% include "${1:NameTemplate}.html" with page=${2:Name}%}
+endsnippet
+
+snippet tblock "Django Templates Block"
+{% block $1 %}
+	$2
+{% endblock %}
+endsnippet
+
+snippet tif "Django Templates If"
+{% if $1%}
+	$2
+{% endif %}
+$0
+endsnippet
+
+snippet tfor "Django Templates For"
+{% for $1 in $2 %}
+	$3
+{% endfor %}
+endsnippet
+
+snippet ttag "Django Templates Tag"
+{{ ${1:Content} }}$0
+endsnippet

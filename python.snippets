@@ -129,6 +129,10 @@ snippet mchar "Django Model Field Char"
 ${1:Name} = models.CharField(max_length=${2:Value})
 endsnippet
 
+snippet mmanager "Django Model Field Manager"
+${1:Name} = models.Manager() # the default manager
+endsnippet
+
 snippet mtext "Django Model Field Text"
 ${1:Name} = models.TextField()
 endsnippet
@@ -225,6 +229,26 @@ endsnippet
 
 # Urls {{{
 
+snippet durlBase "Django Url Base App"
+from django.urls import	path
+from . import views
+
+app_name = '${1:NameApp}'
+
+urlpatterns	= [
+	path('', views.${2:NameView}, name='${2//$0/}'),
+	path('${4:<int:year>/<int:month>/<int:day>/<slug:post>/}',views.${3:NameView},\
+		name='${3//$0/}'),
+]
+endsnippet
+
+snippet durlInclude "Django Url Include"
+path('${1//$0/}/', include('${1:NameApp}.urls',	namespace='${1//$0/}')),
+endsnippet
+
+snippet durlPath "Django Url Path CBV"
+path('', views.${1:NameView}.as_view(), name='${2:NameUrl}'),
+endsnippet
 snippet dcbvurl "Django URL CBV"
 from django.conf.urls import url
 
@@ -298,15 +322,27 @@ endsnippet
 snippet adminClass "Django Admin Class"
 @admin.register(${1:NameApp})
 class ${1//$0/}Admin(admin.ModelAdmin):
-	list_display= (${2:Fields})
-	list_filter	=	('status',	'created',	'publish',	'author')
-	search_fields	=	('title',	'body')
-	prepopulated_fields	=  {${:Name}} #{'slug':	('title',)}
-	raw_id_fields	= ('${:Name}',)
-	date_hierarchy	= '${:Name}'#'publish'
+	list_display = (${2:Fields})
+	list_filter	= ('${3:Field}',)
+	search_fields = ('${4:Field}',)
+	prepopulated_fields = {'${5:Name}': ('${6:Field}',)} #{'slug':('title',)}
+	raw_id_fields = ('${7:Name}',)
+	date_hierarchy = '${8:Name}' #'publish'
+	ordering = ('${9:Name}',)
 endsnippet
 # }}}
 
+# EMAILBACKEND Gmail{{{
+snippet dbackEmail "Django Backend config Email"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER	= '${1:YourAccount}@gmail.com'
+EMAIL_HOST_PASSWORD	= '${2:your_password}'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+endsnippet
+#}}}
 #}}}
 
 # Django Rest {{{
