@@ -1,29 +1,27 @@
 # Python3 {{{
-snippet she "Shebang header for python scripts py3" b
+snippet she "Shebang header f2wsa   0or python scripts py3"
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 $0
 endsnippet
-
-snippet pri "print py3" b
+snippet print3 "print py3"
 print($0)
 endsnippet
 
-snippet inp "input py3"
+snippet input3 "input py3"
 input(${1:Instrucction})
 endsnippet
 
-snippet forb "for with range py3"
+snippet for3 "for with range py3"
 for ${1:Iteration} in range(${2:Value}):
     ${0:pass}
 endsnippet
-
-snippet len "len py3"
+snippet len3 "len py3"
 len(${1:Name})
 endsnippet
 
-snippet openb "open py3"
+snippet open3 "open py3"
 open(${1:ValueOne}, ${2:ValueTwo})
 endsnippet
 
@@ -34,7 +32,7 @@ ${1: Name_Varible} = ${2:Value}
 endsnippet
 
 snippet varm+ "Multiple variable py3"
-i$0
+$0
 endsnippet
                           
 snippet vai "Increment += py3"
@@ -116,43 +114,10 @@ endsnippet
 # }}}
 
 # Fields {{{
-snippet mslug "Django Model Field Slug"
-${1:Name} = models.SlugField(max_length=${2:Value}, unique_for_date='${3:Field}')
-endsnippet
 
-snippet mforeingKey "Django Model Field ForeingKey"
-${1:Name} = models.ForeignKey(User, on_delete=models.CASCADE, \
-							  related_name='${2:ReName}')
-endsnippet
 
-snippet mchar "Django Model Field Char"
-${1:Name} = models.CharField(max_length=${2:Value})
-endsnippet
 
-snippet mmanager "Django Model Field Manager"
-${1:Name} = models.Manager() # the default manager
-endsnippet
 
-snippet mtext "Django Model Field Text"
-${1:Name} = models.TextField()
-endsnippet
-
-snippet mdateTime "Django Model Field DateTime"
-${1:Name} = models.DateTimeField( \
-								${2}#default=timezone.now \
-								#auto_now_add=True \
-								#auto_now=True \
-								)
-endsnippet
-
-snippet mchoice "Django Model Field Simple Choice" b
-${1:ChoiceName} = (
-    ('${2:Key}', '${3:Value}'),
-)
-${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
-							default='${2//$0/}')
-$0
-endsnippet
 
 snippet mchoicesuper "Django Super Choice" b
 #pip install enum34
@@ -460,7 +425,63 @@ endsnippet
 
 # Django {{{
 
-# MVC {{{
+# Fields {{{
+
+snippet fuuid "Django Fields UUID"
+#import uuid
+id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+endsnippet	
+
+snippet fslug "Django Fields Slug"
+${1:Name} = models.SlugField(max_length=${2:Value}, unique_for_date='${3:Field}')
+endsnippet
+
+snippet fchar "Django Fields Char"
+${1:Name} = models.CharField(max_length=${2:Value})
+endsnippet
+                       
+snippet fchoice "Django Fields Simple Choice"
+${1:ChoiceName} = (
+    ('${2:Key}', '${3:Value}'),
+)
+${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
+							default='${2//$0/}')
+$0
+endsnippet
+
+snippet ftext "Django Fields Text"
+${1:Name} = models.TextField()
+endsnippet
+
+snippet fone "Django Fields OneToOne"
+${1:Name} = models.OneToOneField(${2:Table}, on_delete=models.CASCADE,\
+								 primary_key=True)
+endsnippet	
+
+snippet fforeing "Django Fields ForeingKey"
+${1:Name} = models.ForeignKey(${2:Table}, on_delete=models.CASCADE, \
+                              related_name='${3:ReName}')
+endsnippet
+
+snippet fmany "Django Fields ManyToMany"
+${1:Name} = models.ManyToManyField(${2:Table}, through='${3:Name}', \
+								   through_fields=('${4:FieldTable}',))
+endsnippet
+
+snippet fmanager "Django Fields Manager"
+${1:Name} = models.Manager() # the default manager
+endsnippet
+
+snippet fdateTime "Django Fields DateTime"
+${1:Name} = models.DateTimeField( \
+								${2}#default=timezone.now \
+								#auto_now_add=True \
+								#auto_now=True \
+								)
+endsnippet
+# }}}
+
+# MVC {{{      
 
 # Models {{{
 
@@ -481,7 +502,7 @@ endsnippet
 # Forms {{{
 
 # }}}
-  -
+
 # Settings {{{
 
 # }}}
