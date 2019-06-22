@@ -92,48 +92,6 @@ endsnippet
 
 # Django {{{
 
-# Models {{{
-
-snippet dclass "Django Models (class)" b
-class ${1:model}(models.Model):
-    ${2:name} = models.CharField(max_length=${3:Value})
-    $0
-    
-    def __str__(self):
-        return self.${2//$0/}
-
-    def get_absolute_url(self):
-        return reverse('name_url', kwargs={'pk': self.pk})
-    
-    class Meta:
-        #abstract = True
-        ordering = ('${2//$0/}',)
-        verbose_name_plural = '${1//$0/}'
-endsnippet
-
-# }}}
-
-# Fields {{{
-
-
-
-
-
-snippet mchoicesuper "Django Super Choice" b
-#pip install enum34
-#from enum import Enum
-class ${1:CHOICENAME}(Enum):
-    name = ('fn', 'Full Name')
-    #...
-    @classmethod
-    def get_value(cls, member):
-        return cls[member].value[0]
-choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
-$0
-endsnippet
-
-# }}}
-
 # View {{{
 
 snippet dcbviewsimple "Django View CBV Simple" b
@@ -423,7 +381,7 @@ endsnippet
 
 # }}}
 
-# Django {{{
+# Django Xo {{{
 
 # Fields {{{
 
@@ -446,6 +404,19 @@ ${1:ChoiceName} = (
 )
 ${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
 							default='${2//$0/}')
+$0
+endsnippet
+
+snippet fchoicesuper "Django Fields Super Choice"
+#pip install enum34
+#from enum import Enum
+class ${1:CHOICENAME}(Enum):
+    name = ('fn', 'Full Name')
+    #...
+    @classmethod
+    def get_value(cls, member):
+        return cls[member].value[0]
+choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
 $0
 endsnippet
 
@@ -480,6 +451,27 @@ ${1:Name} = models.DateTimeField( \
 								)
 endsnippet
 # }}}
+
+# Models {{{
+
+snippet mclass "Django Model"
+class ${1:model}(models.Model):
+    ${2:name} = models.CharField(max_length=${3:Value})
+    $0
+    
+    def __str__(self):
+        return self.${2//$0/}
+
+    def get_absolute_url(self):
+        return reverse('name_url', kwargs={'pk': self.pk})
+    
+    class Meta:
+        #abstract = True
+        ordering = ('${2//$0/}',)
+        verbose_name_plural = '${1//$0/}'
+endsnippet
+# }}}
+
 
 # MVC {{{      
 
