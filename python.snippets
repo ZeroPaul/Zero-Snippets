@@ -28,12 +28,12 @@ endsnippet
 #Variables assignment {{{
 
 snippet var "Only varible py3"
-${1: Name_Varible} = ${2:Value}
+${1:Name_Varible} = ${2:Value}
 endsnippet
 
-snippet varm+ "Multiple variable py3"
-$0
-endsnippet
+# snippet varm+ "Multiple variable py3"
+# $0
+# endsnippet
                           
 snippet vai "Increment += py3"
 ${1: Name_Varible} += ${2:Value}    
@@ -513,6 +513,14 @@ snippet imach "Import Matplotlib/Numpy"
 import matplotlib.pyplot as plt
 import numpy as ny
 endsnippet
+
+snippet imp3 "Import py3"
+import ${1:Library} as ${2:Alias}
+endsnippet
+
+snippet from3 "From py3"
+from ${1:Library} import ${2:Module} as ${3:Alias}
+endsnippet	
 
 # }}}
 
