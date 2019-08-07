@@ -27,8 +27,12 @@ endsnippet
 
 #Variables assignment {{{
 
-snippet var "Only varible py3"
+snippet var "Only varible py3" i
 ${1:Name_Varible} = ${2:Value}
+endsnippet
+
+snippet varc "Only varible compact py3" i
+${1:Name_Varible}=${2:Value}
 endsnippet
 
 # snippet varm+ "Multiple variable py3"
@@ -450,6 +454,24 @@ ${1:Name} = models.DateTimeField( \
 								#auto_now=True \
 								)
 endsnippet
+
+# fboolean
+# }}}
+
+# Fields Options {{{
+
+snippet fmax_length "Django Fields Options max_length" i
+max_length= ${1:Value}
+endsnippet
+
+snippet frequired "Django Fields Options required" i
+required=${1:True or False}
+endsnippet
+
+snippet erb "ides" i
+<% ${1:code} %>
+endsnippet
+
 # }}}
 
 # Models {{{
@@ -462,8 +484,8 @@ class ${1:model}(models.Model):
     def __str__(self):
         return self.${2//$0/}
 
-    def get_absolute_url(self):
-        return reverse('name_url', kwargs={'pk': self.pk})
+    #def get_absolute_url(self):
+        #return reverse('name_url', kwargs={'pk': self.pk})
     
     class Meta:
         #abstract = True
@@ -472,6 +494,15 @@ class ${1:model}(models.Model):
 endsnippet
 # }}}
 
+# Functions {{{
+
+snippet ddef "Django Functions Simple"
+def ${1:Name}(${2:variables}):
+	$0
+endsnippet
+	
+
+# }}}
 
 # MVC {{{      
 
@@ -518,7 +549,7 @@ snippet imp3 "Import py3"
 import ${1:Library} as ${2:Alias}
 endsnippet
 
-snippet from3 "From py3"
+snippet from3 "From and Alias py3"
 from ${1:Library} import ${2:Module} as ${3:Alias}
 endsnippet	
 
