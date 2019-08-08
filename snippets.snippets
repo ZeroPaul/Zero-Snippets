@@ -1,13 +1,19 @@
-snippet sfolding "Snippet Folding Order"
+snippet snfolding "Snippet Folding Order"
 ${1:#} ${2:NameFolding} {{{
-
-${3:#} }}}
 $0
+${3:#} }}}
 endsnippet
 
-snippet sninp "Snippet Input Variable" i
+snippet snvar "Snippet Input Variable" i
 ${${1:Number}:${2:Name}}
 endsnippet
+
+snippet sniper "Snippet Sniper"
+snippet ${1:Name} "${2:Description}"
+${4:Content}
+${3:endsnippet}
+endsnippet
+	
 
 	
 

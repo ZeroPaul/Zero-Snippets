@@ -1,5 +1,5 @@
 # Python3 {{{
-snippet she "Shebang header f2wsa   0or python scripts py3"
+snippet she3 "Shebang header f2wsa   0or python scripts py3"
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -389,20 +389,20 @@ endsnippet
 
 # Fields {{{
 
-snippet fuuid "Django Fields UUID"
+snippet fuuid3 "Django Fields UUID"
 #import uuid
 id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 endsnippet	
 
-snippet fslug "Django Fields Slug"
+snippet fslug3 "Django Fields Slug"
 ${1:Name} = models.SlugField(max_length=${2:Value}, unique_for_date='${3:Field}')
 endsnippet
 
-snippet fchar "Django Fields Char"
+snippet fchar3 "Django Fields Char"
 ${1:Name} = models.CharField(max_length=${2:Value})
 endsnippet
                        
-snippet fchoice "Django Fields Simple Choice"
+snippet fchoice3 "Django Fields Simple Choice"
 ${1:ChoiceName} = (
     ('${2:Key}', '${3:Value}'),
 )
@@ -411,7 +411,7 @@ ${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
 $0
 endsnippet
 
-snippet fchoicesuper "Django Fields Super Choice"
+snippet fchoicesuper3 "Django Fields Super Choice"
 #pip install enum34
 #from enum import Enum
 class ${1:CHOICENAME}(Enum):
@@ -424,59 +424,65 @@ choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
 $0
 endsnippet
 
-snippet ftext "Django Fields Text"
+snippet ftext3 "Django Fields Text"
 ${1:Name} = models.TextField()
 endsnippet
 
-snippet fone "Django Fields OneToOne"
+snippet fone3 "Django Fields OneToOne"
 ${1:Name} = models.OneToOneField(${2:Table}, on_delete=models.CASCADE,\
 								 primary_key=True)
 endsnippet	
 
-snippet fforeing "Django Fields ForeingKey"
+snippet fforeing3 "Django Fields ForeingKey"
 ${1:Name} = models.ForeignKey(${2:Table}, on_delete=models.CASCADE, \
                               related_name='${3:ReName}')
 endsnippet
 
-snippet fmany "Django Fields ManyToMany"
+snippet fmany3 "Django Fields ManyToMany"
 ${1:Name} = models.ManyToManyField(${2:Table}, through='${3:Name}', \
 								   through_fields=('${4:FieldTable}',))
 endsnippet
 
-snippet fmanager "Django Fields Manager"
+snippet fmanager3 "Django Fields Manager"
 ${1:Name} = models.Manager() # the default manager
 endsnippet
 
-snippet fdateTime "Django Fields DateTime"
-${1:Name} = models.DateTimeField( \
-								${2}#default=timezone.now \
-								#auto_now_add=True \
-								#auto_now=True \
-								)
-endsnippet
+snippet fdateTime3 "Django Fields DateTime"
+${1:Name} = models.DateTimeField(${2:Options})
+endsnippet                                   
 
 # fboolean
 # }}}
 
 # Fields Options {{{
 
-snippet fmax_length "Django Fields Options max_length" i
+snippet max_length3 "Django Fields Options max_length" i
 max_length= ${1:Value}
 endsnippet
 
-snippet frequired "Django Fields Options required" i
+snippet required3 "Django Fields Options required" i
 required=${1:True or False}
 endsnippet
 
-snippet erb "ides" i
-<% ${1:code} %>
+snippet default_datetime3 "Django Fields Options Default DateTime" i
+default=timezone.now
+endsnippet
+
+snippet auto_add_datetime3 "Django FIelds Options Auto Add DateTime" i
+auto_now_add=True
+auto_now=True
+endsnippet
+
+snippet auto_datetime3 "Django FIelds Options Auto DateTime" i
+auto_now_add=True
+auto_now=True
 endsnippet
 
 # }}}
 
 # Models {{{
 
-snippet mclass "Django Model"
+snippet classModel3 "Django Model"
 class ${1:model}(models.Model):
     ${2:name} = models.CharField(max_length=${3:Value})
     $0
@@ -496,54 +502,35 @@ endsnippet
 
 # Functions {{{
 
-snippet ddef "Django Functions Simple"
+snippet def3 "Django Functions Simple"
 def ${1:Name}(${2:variables}):
-	$0
+	${3:pass}
 endsnippet
 	
 
 # }}}
 
-# MVC {{{      
+# Class {{{
 
-# Models {{{
+snippet class3 "Django Class Simple"
+class ${1:Name}(${2:Variables}):
+	${3:pass}
+endsnippet
 
-# }}}
+snippet super3 "Django Class Super"
+super(${1:Variables})
+endsnippet
 
-# Admin {{{
+snippet ynit3 "Django Class __init__" i
+__init__(${1:variables})
+endsnippet
 
-# }}}
-
-# Views {{{
-
-# }}}
-
-# Urls {{{
-
-# }}}
-   
-# Forms {{{
-
-# }}}
-
-# Settings {{{
-
-# }}}
-
-# }}}
-
-#RestFull {{{
 
 # }}}
 
 # }}}
 
 # Imports {{{
-
-snippet imach "Import Matplotlib/Numpy"
-import matplotlib.pyplot as plt
-import numpy as ny
-endsnippet
 
 snippet imp3 "Import py3"
 import ${1:Library} as ${2:Alias}
