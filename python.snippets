@@ -154,63 +154,6 @@ endsnippet
 
 # }}}
 
-# Urls {{{
-
-snippet durlBase "Django Url Base App"
-from django.urls import	path
-from . import views
-
-app_name = '${1:NameApp}'
-
-urlpatterns	= [
-	path('', views.${2:NameView}, name='${2//$0/}'),
-	path('${4:<int:year>/<int:month>/<int:day>/<slug:post>/}',views.${3:NameView},\
-		name='${3//$0/}'),
-]
-endsnippet
-
-
-snippet dcbvurl "Django URL CBV"
-from django.conf.urls import url
-
-from . import views #Best Practice
-#from .views import ${1//$0/}ListView, ${1//$0/}DetailView,
-#                   ${1//$0/}ResultsView, ${1//$0/}UpdateView
-
-urlpatterns = [
-    url(
-        regex=r'^$',
-        view=views.${1:ModelName}ListView.as_view(),
-        name='list'
-    ),
-    url(
-        regex=r'^(?P<pk>\d+)/$',
-        view=views.${1//$0/}DetailView.as_view(),
-        name='detail'
-    ),
-    url(
-        regex=r'^(?P<pk>\d+)/results/$',
-        view=views.${1//$0/}ResultsView.as_view(),
-        name='results'
-    ),
-    url(
-        regex=r'^(?P<pk>\d+)/update/$',
-        view=views.${1//$0/}UpdateView.as_view(),
-        name='update'
-    )
-]
-
-endsnippet
-
-snippet dsurl "Django URL settings root" b
-urlpatterns += [
-    url(r'^${1: NameApp}/', include('${1//$0/}.urls', namespace='${1//$0/}')),
-]
-
-endsnippet
-
-# }}}
-
 # Validators {{{
 
 snippet dvalidators "Django Validators" b
@@ -528,6 +471,13 @@ class ${1:Name}List(generics.ListCreateAPIView):
 	queryset = ${1//$0/}.objects.all()
 	serializer_class = ${1//$0/}Serializer
 	name = '${1/\w+\s*/\L$0\E/}-list'
+
+	#filter_class = ${1//$0/}Filter
+	filterset_fields = ['${2:Field}', ]
+	search_fields = ['${2//$0/}', ]
+	ordering_fields = ['${2//$0/}', ]
+
+$0
 endsnippet
 
 snippet viewDetailclass3 "Django Views Detail"
@@ -547,7 +497,7 @@ $0
 endsnippet
 
 snippet urlInclude3 "Django Url Include"
-path('${1//$0/}/', include('${1:NameApp}.urls', namespace='${1//$0/}')),
+path('${1:Url}/', include('${2:NameApp}.urls', namespace='${2//$0/}')),
 endsnippet
 
 # }}}
