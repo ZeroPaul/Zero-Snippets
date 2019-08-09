@@ -1,5 +1,5 @@
 # Python3 {{{
-snippet she3 "Shebang header f2wsa   0or python scripts py3"
+snippet she3 "Shebang header for python scripts py3"
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -169,13 +169,7 @@ urlpatterns	= [
 ]
 endsnippet
 
-snippet durlInclude "Django Url Include"
-path('${1//$0/}/', include('${1:NameApp}.urls',	namespace='${1//$0/}')),
-endsnippet
 
-snippet durlPath "Django Url Path CBV"
-path('', views.${1:NameView}.as_view(), name='${2:NameUrl}'),
-endsnippet
 snippet dcbvurl "Django URL CBV"
 from django.conf.urls import url
 
@@ -410,6 +404,9 @@ ${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
 							default='${2//$0/}')
 $0
 endsnippet
+snippet fchoiceOption3 "Django Fields More Options"
+('${1:Key}', '${2:Value}'),
+endsnippet
 
 snippet fchoicesuper3 "Django Fields Super Choice"
 #pip install enum34
@@ -451,7 +448,14 @@ snippet fdateTime3 "Django Fields DateTime"
 ${1:Name} = models.DateTimeField(${2:Options})
 endsnippet                                   
 
-# fboolean
+snippet fboolean3 "Django Fields Boolean"
+${1:Name} = models.BooleanField(${2:Options})
+endsnippet
+
+snippet finteger3 "Django Fields Integer"
+${1:Name} = models.IntegerField()
+$0
+endsnippet
 # }}}
 
 # Fields Options {{{
@@ -468,36 +472,84 @@ snippet default_datetime3 "Django Fields Options Default DateTime" i
 default=timezone.now
 endsnippet
 
-snippet auto_add_datetime3 "Django FIelds Options Auto Add DateTime" i
+snippet auto_add_datetime3 "Django Fields Options Auto Add DateTime" i
 auto_now_add=True
 auto_now=True
 endsnippet
 
-snippet auto_datetime3 "Django FIelds Options Auto DateTime" i
+snippet auto_datetime3 "Django Fields Options Auto DateTime" i
 auto_now_add=True
 auto_now=True
 endsnippet
 
+snippet default3 "Django Fields Options Auto True" i
+default=${1:True or False}
+endsnippet
+
+snippet tem3 "Django Item" i
+'${1:value}',
+endsnippet
 # }}}
 
 # Models {{{
 
-snippet classModel3 "Django Model"
+snippet modelClass3 "Django Model"
 class ${1:model}(models.Model):
     ${2:name} = models.CharField(max_length=${3:Value})
     $0
     
     def __str__(self):
-        return self.${2//$0/}
+        return str(self.${2//$0/})
 
     #def get_absolute_url(self):
         #return reverse('name_url', kwargs={'pk': self.pk})
     
     class Meta:
         #abstract = True
-        ordering = ('${2//$0/}',)
+        ordering = ['${2//$0/}',]
         verbose_name_plural = '${1//$0/}'
 endsnippet
+# }}}
+
+# Serializers {{{
+snippet serializerClass3 "Django Serializer"
+class ${1:Name}Serializer(serializers.ModelSerializer):
+
+	class Meta:                                                                  
+		model = ${1//$0/}
+		fields = [${2:Fields}]
+endsnippet
+# }}}
+
+# Views {{{
+
+snippet viewListClass3 "Django Views List"
+class ${1:Name}List(generics.ListCreateAPIView):
+	queryset = ${1//$0/}.objects.all()
+	serializer_class = ${1//$0/}Serializer
+	name = '${1/\w+\s*/\L$0\E/}-list'
+endsnippet
+
+snippet viewDetailclass3 "Django Views Detail"
+class ${1:Name}Detail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ${1//$0/}.objects.all()
+	serializer_class = ${1//$0/}Serializer
+	name = '${1/\w+\s*/\L$0\E/}-detail'
+endsnippet
+
+# }}}
+
+# Urls {{{
+
+snippet urlPath3 "Django Url Path"
+path('${1:Name}', views.${2:NameView}.as_view(), name=${3:NameUrl}),
+$0
+endsnippet
+
+snippet urlInclude3 "Django Url Include"
+path('${1//$0/}/', include('${1:NameApp}.urls', namespace='${1//$0/}')),
+endsnippet
+
 # }}}
 
 # Functions {{{
@@ -525,6 +577,12 @@ snippet ynit3 "Django Class __init__" i
 __init__(${1:variables})
 endsnippet
 
+
+# }}}
+
+# Settings {{{
+
+# 'drones.apps.DronesConfig'
 
 # }}}
 
