@@ -1,0 +1,22 @@
+snippet aliaz "Alias ZSH"
+alias ${1:alias}="${2:Command}"
+$0
+endsnippet
+
+snippet functionz "Function ZSH"
+function __${1:name} {
+	${2:script}
+}
+endsnippet
+
+snippet echoz "Echo ZSH" i
+echo "${1:script}"
+endsnippet
+
+snippet foldingz "Folding ZSH"
+# ${1:NameFolding} {{{
+$0
+# }}}
+endsnippet
+
+# vim:ft=snippets:
