@@ -259,6 +259,21 @@ snippet finteger3 "Django Fields Integer"
 ${1:Name} = models.IntegerField()
 $0
 endsnippet
+
+snippet fdecimal3 "Django Fields Decimal"
+${1:Name} = models.DecimalField(max_digits=${2:value}, decimal_places=${3:value})
+$0
+endsnippet
+
+snippet ffloat3 "Django Fields Float"
+${1:Name} = models.FloatField(default=${2:value})
+$0
+endsnippet
+
+snippet fimage3 "Django Fields Image"
+${1:Name} = models.ImageField(upload_to='${2:path}/')
+$0
+endsnippet
 # }}}
 
 # Fields Options {{{
@@ -320,6 +335,20 @@ class ${1:model}(models.Model):
 		ordering = ['${2//$0/}',]
 		verbose_name_plural = '${1//$0/}'
 endsnippet
+# }}}
+
+# Admin {{{
+
+snippet adminClass3 "Django Admin"
+@register(Quinua)                                                                
+class ${1:Model}Admin(admin.ModelAdmin):                                             
+	# icon_name = 'name icon'
+	list_display = ('${2:field}', $0)
+	# fields = []                    
+	# readonly_fields = ()                              
+	# search_fields = [] 
+endsnippet
+
 # }}}
 
 # Serializers {{{
