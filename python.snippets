@@ -320,7 +320,8 @@ endsnippet
 snippet modelClass3 "Django Model"
 @python_2_unicode_compatible # For Python 3.5+ and 2.7
 class ${1:model}(models.Model):
-	uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+	# uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	${2:name} = models.CharField(max_length=${3:Value})
 	$0
 	
@@ -333,20 +334,30 @@ class ${1:model}(models.Model):
 	class Meta:
 		#abstract = True
 		ordering = ['${2//$0/}',]
+		verbose_name = '${1//$0/}'
 		verbose_name_plural = '${1//$0/}'
 endsnippet
 # }}}
 
 # Admin {{{
 
+snippet adminInline3 "Django Admin Inline"
+class ${1:Model}Inline(admin.TabularInline):
+	model = ${1//$0/}
+	extra = ${2:0}
+
+$0
+endsnippet
+
 snippet adminClass3 "Django Admin"
-@register(Quinua)                                                                
-class ${1:Model}Admin(admin.ModelAdmin):                                             
+@register(${1:Model})                                                                
+class ${1//$0/}Admin(admin.ModelAdmin):                                             
 	# icon_name = 'name icon'
 	list_display = ('${2:field}', $0)
 	# fields = []                    
 	# readonly_fields = ()                              
-	# search_fields = [] 
+	# search_fields = []
+$0
 endsnippet
 
 # }}}
