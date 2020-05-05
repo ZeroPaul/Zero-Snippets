@@ -303,11 +303,11 @@ endsnippet
 
 
 snippet modelClass3 "Django Model"
-@python_2_unicode_compatible # For Python 3.5+ and 2.7
+#@python_2_unicode_compatible # For Python 3.5+ and 2.7
 class ${1:model}(models.Model):
 	uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
 	${2:name} = models.CharField(max_length=${3:Value})
-	$0
+	${4:fields...}
 	
 	def __str__(self):
 		return str(self.${2//$0/})
@@ -319,6 +319,8 @@ class ${1:model}(models.Model):
 		#abstract = True
 		ordering = ['${2//$0/}',]
 		verbose_name_plural = '${1//$0/}'
+
+$0
 endsnippet
 # }}}
 
