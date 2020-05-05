@@ -192,7 +192,9 @@ id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 endsnippet	
 
 snippet fslug3 "Django Fields Slug"
-${1:Name} = models.SlugField(max_length=${2:Value}, unique_for_date='${3:Field}')
+${1:Name} = models.SlugField(
+	max_length=${2:Value}, unique_for_date='${3:Field}'
+)
 endsnippet
 
 snippet fchar3 "Django Fields Char"
@@ -203,8 +205,9 @@ snippet fchoice3 "Django Fields Simple Choice"
 ${1:ChoiceName} = (
     ('${2:Key}', '${3:Value}'),
 )
-${4:Name} = models.CharField(max_length=${5:Value}, choices=${1//$0/},\
-							default='${2//$0/}')
+${4:Name} = models.CharField(
+	max_length=${5:Value}, choices=${1//$0/}, default='${2//$0/}'
+)
 $0
 endsnippet
 snippet fchoiceOption3 "Django Fields More Options"
@@ -229,18 +232,21 @@ ${1:Name} = models.TextField()
 endsnippet
 
 snippet fone3 "Django Fields OneToOne"
-${1:Name} = models.OneToOneField(${2:Table}, on_delete=models.CASCADE,\
-								 primary_key=True)
+${1:Name} = models.OneToOneField(
+	${2:Table}, on_delete=models.CASCADE, primary_key=True
+)
 endsnippet	
 
 snippet fforeing3 "Django Fields ForeingKey"
-${1:Name} = models.ForeignKey(${2:Table}, on_delete=models.CASCADE, \
-                              related_name='${3:ReName}')
+${1:Name} = models.ForeignKey(
+	${2:Table}, on_delete=models.CASCADE, related_name='${3:ReName}'
+)
 endsnippet
 
 snippet fmany3 "Django Fields ManyToMany"
-${1:Name} = models.ManyToManyField(${2:Table}, through='${3:Name}', \
-								   through_fields=('${4:FieldTable}',))
+${1:Name} = models.ManyToManyField(
+	${2:Table}, through='${3:Name}', through_fields=('${4:FieldTable}',)
+)
 endsnippet
 
 snippet fmanager3 "Django Fields Manager"
@@ -257,6 +263,23 @@ endsnippet
 
 snippet finteger3 "Django Fields Integer"
 ${1:Name} = models.IntegerField()
+$0
+endsnippet
+
+snippet fdecimal3 "Django Fields Decimal"
+${1:Name} = models.DecimalField(
+	max_digits=${2:value}, decimal_places=${3:value}
+)
+$0
+endsnippet
+
+snippet ffloat3 "Django Fields Float"
+${1:Name} = models.FloatField(default=${2:value})
+$0
+endsnippet
+
+snippet fimage3 "Django Fields Image"
+${1:Name} = models.ImageField(upload_to='${2:path}/')
 $0
 endsnippet
 # }}}
@@ -305,7 +328,8 @@ endsnippet
 snippet modelClass3 "Django Model"
 #@python_2_unicode_compatible # For Python 3.5+ and 2.7
 class ${1:model}(models.Model):
-	uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+	# uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	${2:name} = models.CharField(max_length=${3:Value})
 	${4:fields...}
 	
@@ -318,10 +342,40 @@ class ${1:model}(models.Model):
 	class Meta:
 		#abstract = True
 		ordering = ['${2//$0/}',]
+		verbose_name = '${1//$0/}'
 		verbose_name_plural = '${1//$0/}'
 
 $0
 endsnippet
+
+snippet modelSave3 "Django Model Function Save"
+def save(self, *args, **kwargs):
+	${1:pass}
+	super(${2:Model}, self).save(*args, **kwargs)
+endsnippet
+# }}}
+
+# Admin {{{
+
+snippet adminInline3 "Django Admin Inline"
+class ${1:Model}Inline(admin.TabularInline):
+	model = ${1//$0/}
+	extra = ${2:0}
+
+$0
+endsnippet
+
+snippet adminClass3 "Django Admin"
+@register(${1:Model})                                                                
+class ${1//$0/}Admin(admin.ModelAdmin):                                             
+	# icon_name = 'name icon'
+	list_display = ('${2:field}', $0)
+	# fields = []                    
+	# readonly_fields = ()                              
+	# search_fields = []
+$0
+endsnippet
+
 # }}}
 
 # Serializers {{{
