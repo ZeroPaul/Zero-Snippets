@@ -1,396 +1,147 @@
-# Python3 {{{
-snippet she3 "Shebang header for python scripts py3"
-#!/usr/bin/env python${1:Verion 2 or 3}
-# -*- coding: utf-8 -*-
+# XO
 
-$0
-endsnippet
-snippet print3 "print py3"
-print($0)
+#Fields Snippers
+
+snippet fboolean3 "Django Fields Boolean"
+${1:field_name} = models.BooleanField(default=${2:True})
 endsnippet
 
-snippet input3 "input py3"
-input(${1:Instrucction})
+snippet dj:fieldChar "Django Fields Char"
+${1:field_name} = models.CharField(max_length=${2:value})
 endsnippet
 
-snippet for3 "for with range py3"
-for ${1:Iteration} in range(${2:Value}):
-    ${0:pass}
-endsnippet
-
-snippet len3 "len py3" i
-len(${1:Name})
-endsnippet
-
-snippet open3 "open py3"
-open(${1:ValueOne}, ${2:ValueTwo})
-endsnippet
-
-#Variables assignment {{{
-
-snippet var "Only varible py3" i
-${1:Name_Varible} = ${2:Value}
-endsnippet
-
-snippet varc "Only varible compact py3" i
-${1:Name_Varible}=${2:Value}
-endsnippet
-
-# snippet varm+ "Multiple variable py3"
-# $0
-# endsnippet
-
-snippet vai "Increment += py3"
-${1: Name_Varible} += ${2:Value}
-endsnippet
-
-snippet vad "Decrement -= py3"
-${1: Name_Varible} -= ${2:Value}
-endsnippet
-
-#}}}
-
-#Type conversions {{{
-
-snippet int3 "Integer / conversions py3"
-int(${1:Variable})
-endsnippet
-
-snippet intBase3 "Integer base in parameter / conversions py3"
-int(${1:Variable}, ${2:BaseIN})
-
-endsnippet
-snippet flo3 "Float py3" i
-int(${1:Variable})
-endsnippet
-
-snippet rou3 "Round / conversions py3" i
-round(${1:Variable}, ${2:NumberDecimal})
-endsnippet
-
-snippet boo3 "Bool / conversions py3" i
-bool(${1:Variable})
-endsnippet
-
-snippet str3 "String / conversions py3" i
-str(${1:Variable})
-endsnippet
-
-snippet lis3 "List / conversions py3" i
-list(${1:Variable})
-# list("abc") -> ['a','b','c']
-endsnippet
-
-snippet dic "Dicctionary / conversions py3" i
-dict(${1:Variable})
-# dict([(3, "three"), (1, "one")]) -> {1: 'one', 3: 'three'}
-endsnippet
-
-snippet set "Set / conversions py3" i
-set(${1:Variable})
-# set(["one", "two"]) -> {'one', 'two'}
-endsnippet
-
-#}}}
-
-#}}}
-
-# OpenCV {{{
-
-snippet rectagleCV2 "OpenCV Rectangle"
-cv2.rectangle(${1:Image}, (${2:x1}, ${3:y1}), (${4:x2}, ${5:y2}), (255, 0, 0), 2)
-endsnippet
-
-# }}}
-
-# Django {{{
-
-
-# Validators {{{
-
-snippet dvalidators "Django Validators" b
-# core/validators.py
-from django.core.exceptions import ValidationError
-
-def validate_${1:name}(value):
-    """Raise a ValidationError if the value doesn't start with the
-        word '${1//$0/}'.
-    """
-    if not value.startswith('${1//$0/}'):
-        msg = 'Must start with ${1//$0/}'
-        raise ValidationError(msg)
-   #Usage
-   #from .validators import validate_${1//$0/}
-   #title = models.CharField(max_length=255, validators=[validate_${1//$0/}])
-
-endsnippet
-
-# }}}
-
-# Admin {{{
-
-snippet dadminRegister "Django Admin Register"
-
-admin.site.register(${1:NameModel})
-
-endsnippet
-
-snippet adminClass "Django Admin Class"
-@admin.register(${1:NameApp})
-class ${1//$0/}Admin(admin.ModelAdmin):
-	list_display = (${2:Fields})
-	list_filter	= ('${3:Field}',)
-	search_fields = ('${4:Field}',)
-	prepopulated_fields = {'${5:Name}': ('${6:Field}',)} #{'slug':('title',)}
-	raw_id_fields = ('${7:Name}',)
-	date_hierarchy = '${8:Name}' #'publish'
-	ordering = ('${9:Name}',)
-endsnippet
-# }}}
-
-# EMAILBACKEND Gmail{{{
-snippet dbackEmail "Django Backend config Email"
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER	= '${1:YourAccount}@gmail.com'
-EMAIL_HOST_PASSWORD	= '${2:your_password}'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-endsnippet
-#}}}
-#}}}
-
-
-# Python3 Xo {{{
-
-snippet yter3 "iter py3" i
-iter(${1:varible})
-endsnippet
-
-snippet zip3 "zip py3" i
-zip(${1:variables})
-endsnippet
-
-snippet help3 "help py3" i
-help(${1:Classes or Function})
-endsnippet
-
-snippet printformat3 "print format py3" i
-print('${1:Description}'.format(${2:Variables}))
-endsnippet
-
-# }}}
-
-# Django Xo {{{
-
-# Fields {{{
-
-snippet fuuid3 "Django Fields UUID"
-#import uuid
-id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-endsnippet
-
-snippet fslug3 "Django Fields Slug"
-${1:Name} = models.SlugField(
-	max_length=${2:Value}, unique_for_date='${3:Field}'
+snippet dj:fieldChoice "Django Fields Choice Simple"
+${1:CHOICE_NAME} = (
+    ('${2:key}', '${3:value}'),
 )
-endsnippet
-
-snippet fchar3 "Django Fields Char"
-${1:Name} = models.CharField(max_length=${2:Value})
-endsnippet
-
-snippet fchoice3 "Django Fields Simple Choice"
-${1:ChoiceName} = (
-    ('${2:Key}', '${3:Value}'),
-)
-${4:Name} = models.CharField(
-	max_length=${5:Value}, choices=${1//$0/}, default='${2//$0/}'
+${4:field_name} = models.CharField(
+	max_length=${5:value}, choices=${1//$0/}, default='${2//$0/}'
 )
 $0
 endsnippet
-snippet fchoiceOption3 "Django Fields More Options"
-('${1:Key}', '${2:Value}'),
-endsnippet
 
-snippet fchoicesuper3 "Django Fields Super Choice"
-#pip install enum34
-#from enum import Enum
-class ${1:CHOICENAME}(Enum):
-    name = ('fn', 'Full Name')
+snippet dj:fieldChoiceClass "Django Fields Choice Class"
+# pip install enum34
+from enum import Enum
+
+class ${1:Choice}Enum(Enum):
+    name = (
+        'fn', 'Full Name',
+    )
     #...
     @classmethod
     def get_value(cls, member):
         return cls[member].value[0]
-choice = models.CharField(max_length=2, choices=[x.value for x in ${1//$0/}])
-$0
-endsnippet
 
-snippet ftext3 "Django Fields Text"
-${1:Name} = models.TextField()
-endsnippet
-
-snippet fone3 "Django Fields OneToOne"
-${1:Name} = models.OneToOneField(
-	${2:Table}, on_delete=models.CASCADE, primary_key=True
+${2:field_name} = models.CharField(
+    max_length=${2:value}, 
+    choices=[x.value for x in ${1//$0/}Enum]
 )
 endsnippet
 
-snippet fforeing3 "Django Fields ForeingKey"
-${1:Name} = models.ForeignKey(
-	${2:Table}, on_delete=models.CASCADE, related_name='${3:ReName}'
-)
+snippet dj:optionChoice "Django Fields Choice Options"
+'${1:key}', '${2:value}',
 endsnippet
 
-snippet fmany3 "Django Fields ManyToMany"
-${1:Name} = models.ManyToManyField(
-	${2:Table}, through='${3:Name}', through_fields=('${4:FieldTable}',)
-)
+snippet dj:fieldDateTime "Django Fields DateTime"
+${1:field_name} = models.DateTimeField()
 endsnippet
 
-snippet fmanager3 "Django Fields Manager"
-${1:Name} = models.Manager() # the default manager
-endsnippet
-
-snippet fdateTime3 "Django Fields DateTime"
-${1:Name} = models.DateTimeField(${2:Options})
-endsnippet
-
-snippet fboolean3 "Django Fields Boolean"
-${1:Name} = models.BooleanField(${2:Options})
-endsnippet
-
-snippet finteger3 "Django Fields Integer"
-${1:Name} = models.IntegerField()
-$0
-endsnippet
-
-snippet fdecimal3 "Django Fields Decimal"
-${1:Name} = models.DecimalField(
+snippet dj:fieldDecimal "Django Fields Decimal"
+${1:field_name} = models.DecimalField(
 	max_digits=${2:value}, decimal_places=${3:value}
 )
-$0
 endsnippet
 
-snippet ffloat3 "Django Fields Float"
-${1:Name} = models.FloatField(default=${2:value})
-$0
+snippet dj:fieldFloat "Django Fields Float"
+${1:field_name} = models.FloatField(default=${2:value})
 endsnippet
 
-snippet fimage3 "Django Fields Image"
-${1:Name} = models.ImageField(upload_to='${2:path}/')
-$0
-endsnippet
-# }}}
-
-# Fields Options {{{
-
-snippet max_length3 "Django Fields Options max_length" i
-max_length= ${1:Value}
+snippet dj:fieldForeignKey "Django Fields ForeingKey"
+${1:field_name} = models.ForeignKey(
+	${2:Table}, on_delete=models.CASCADE, 
+    related_name='${3:field_related}'
+)
 endsnippet
 
-snippet required3 "Django Fields Options required" i
-required=${1:True or False}
+snippet dj:fieldImage "Django Fields Image"
+${1:field_name} = models.ImageField(upload_to='${2:path}/')
 endsnippet
 
-snippet default_datetime3 "Django Fields Options Default DateTime" i
-default=timezone.now
+snippet dj:fieldManager "Django Fields Manager"
+${1:field_name} = ${1:models.}Manager()
 endsnippet
 
-snippet auto_add_datetime3 "Django Fields Options Auto Add DateTime" i
-auto_now_add=True
+snippet dj:fieldManyToMany "Django Fields ManyToMany"
+${1:field_name} = models.ManyToManyField(
+	${2:Table}, 
+    related_name='${3:field_related}'
+)
 endsnippet
 
-snippet auto_datetime3 "Django Fields Options Auto DateTime" i
-auto_now=True
+snippet dj:fieldOneToOne "Django Fields OneToOne"
+${1:field_name} = models.OneToOneField(
+	${2:Table}, on_delete=models.CASCADE
+)
 endsnippet
 
-snippet default3 "Django Fields Options Auto True" i
-default=${1:True or False}
+snippet dj:fieldSlug "Django Fields Slug"
+${1:field_name} = models.SlugField(
+	max_length=${2:value},
+    unique_for_date='${3:Field}'
+)
 endsnippet
 
-snippet te3 "Django Item" i
-'${1:value}',
+snippet dj:fieldText "Django Fields Text"
+${1:field_name} = models.TextField()
 endsnippet
-# }}}
 
-# Models {{{
-snippet modelImport3 "Django Model Import"
-import uuid as uuid_lib #pip install uuid
-from django.utils.encoding import python_2_unicode_compatible
-from django.db import models
-
-$0
+snippet dj:fieldUuid "Django Fields UUID"
+from uuid import uuid4
+${1:field_name} = models.UUIDField(
+    primary_key=True, default=uuid4, editable=False
+)
 endsnippet
 
 
-snippet modelClass3 "Django Model"
-#@python_2_unicode_compatible # For Python 3.5+ and 2.7
-class ${1:model}(models.Model):
-	# uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
-	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	${2:name} = models.CharField(max_length=${3:Value})
-	${4:fields...}
+#Model Snippers
+
+snippet dj:model "Django Model"
+class ${1:Model}(models.Model):
+    # fields
+	${2:name} = models.CharField(max_length=255)
+
+    class Meta:
+		# ordering = ['${2//$0/}',]
+		verbose_name = '${1//$0/}'
+		verbose_name_plural = '${1//$0/}s'
 
 	def __str__(self):
-		return str(self.${2//$0/})
+        return f'{self.${2//$0/}}'
 
-	#def get_absolute_url(self):
-		#return reverse('name_url', kwargs={'pk': self.pk})
+endsnippet
 
-	class Meta:
-		#abstract = True
-		ordering = ['${2//$0/}',]
-		verbose_name = '${1//$0/}'
-		verbose_name_plural = '${1//$0/}'
+snippet dj:modelFunction "Django Model Function"
+def ${1:name_function}(self):
+	${2:pass}
+endsnippet
+
+snippet dj:modelImport "Django Model Import"
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 $0
 endsnippet
 
-snippet modelSave3 "Django Model Function Save"
+snippet dj:modelSave "Django Model Function Save"
 def save(self, *args, **kwargs):
 	${1:pass}
 	super(${2:Model}, self).save(*args, **kwargs)
 endsnippet
-# }}}
 
-# Admin {{{
+#Test
 
-snippet adminInline3 "Django Admin Inline"
-class ${1:Model}Inline(admin.TabularInline):
-	model = ${1//$0/}
-	extra = ${2:0}
-
-$0
-endsnippet
-
-snippet adminClass3 "Django Admin"
-@register(${1:Model})
-class ${1//$0/}Admin(admin.ModelAdmin):
-	# icon_name = 'name icon'
-	list_display = ('${2:field}', $0)
-	# fields = []
-	# readonly_fields = ()
-	# search_fields = []
-$0
-endsnippet
-
-# }}}
-
-# Serializers {{{
-snippet serializerClass3 "Django Serializer"
-class ${1:Name}Serializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = ${1//$0/}
-		fields = [${2:Fields}]
-endsnippet
-# }}}
-
-# Views {{{
-
-snippet viewListClass3 "Django Views List"
+snippet djt:viewListClass3 "Django Views List"
 class ${1:Name}List(generics.ListCreateAPIView):
 	queryset = ${1//$0/}.objects.all()
 	serializer_class = ${1//$0/}Serializer
@@ -403,74 +154,3 @@ class ${1:Name}List(generics.ListCreateAPIView):
 
 $0
 endsnippet
-
-snippet viewDetailclass3 "Django Views Detail"
-class ${1:Name}Detail(generics.RetrieveUpdateDestroyAPIView):
-	queryset = ${1//$0/}.objects.all()
-	serializer_class = ${1//$0/}Serializer
-	name = '${1/\w+\s*/\L$0\E/}-detail'
-endsnippet
-
-# }}}
-
-# Urls {{{
-
-snippet urlPath3 "Django Url Path"
-path('${1:Name}', views.${2:NameView}.as_view(), name=${3:NameUrl}),
-$0
-endsnippet
-
-snippet urlInclude3 "Django Url Include"
-path('${1:Url}/', include('${2:NameApp}.urls', namespace='${2//$0/}')),
-endsnippet
-
-# }}}
-
-# Functions {{{
-
-snippet def3 "Django Functions Simple"
-def ${1:Name}(${2:variables}):
-	${3:pass}
-endsnippet
-
-
-# }}}
-
-# Class {{{
-
-snippet class3 "Django Class Simple"
-class ${1:Name}(${2:Variables}):
-	${3:pass}
-endsnippet
-
-snippet super3 "Django Class Super"
-super(${1:Variables})
-endsnippet
-
-snippet ynit3 "Django Class __init__" i
-__init__(${1:variables})
-endsnippet
-
-
-# }}}
-
-# Settings {{{
-
-# 'drones.apps.DronesConfig'
-
-# }}}
-
-# }}}
-
-# Imports {{{
-
-snippet imp3 "Import py3"
-import ${1:Library} as ${2:Alias}
-endsnippet
-
-snippet from3 "From and Alias py3"
-from ${1:Library} import ${2:Module} as ${3:Alias}
-endsnippet
-
-# }}}
-
