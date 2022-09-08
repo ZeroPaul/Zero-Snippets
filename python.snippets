@@ -39,13 +39,13 @@ endsnippet
 # snippet varm+ "Multiple variable py3"
 # $0
 # endsnippet
-                          
+
 snippet vai "Increment += py3"
-${1: Name_Varible} += ${2:Value}    
+${1: Name_Varible} += ${2:Value}
 endsnippet
 
 snippet vad "Decrement -= py3"
-${1: Name_Varible} -= ${2:Value}    
+${1: Name_Varible} -= ${2:Value}
 endsnippet
 
 #}}}
@@ -130,7 +130,7 @@ endsnippet
 # Admin {{{
 
 snippet dadminRegister "Django Admin Register"
-	
+
 admin.site.register(${1:NameModel})
 
 endsnippet
@@ -189,7 +189,7 @@ endsnippet
 snippet fuuid3 "Django Fields UUID"
 #import uuid
 id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-endsnippet	
+endsnippet
 
 snippet fslug3 "Django Fields Slug"
 ${1:Name} = models.SlugField(
@@ -200,7 +200,7 @@ endsnippet
 snippet fchar3 "Django Fields Char"
 ${1:Name} = models.CharField(max_length=${2:Value})
 endsnippet
-                       
+
 snippet fchoice3 "Django Fields Simple Choice"
 ${1:ChoiceName} = (
     ('${2:Key}', '${3:Value}'),
@@ -235,7 +235,7 @@ snippet fone3 "Django Fields OneToOne"
 ${1:Name} = models.OneToOneField(
 	${2:Table}, on_delete=models.CASCADE, primary_key=True
 )
-endsnippet	
+endsnippet
 
 snippet fforeing3 "Django Fields ForeingKey"
 ${1:Name} = models.ForeignKey(
@@ -255,7 +255,7 @@ endsnippet
 
 snippet fdateTime3 "Django Fields DateTime"
 ${1:Name} = models.DateTimeField(${2:Options})
-endsnippet                                   
+endsnippet
 
 snippet fboolean3 "Django Fields Boolean"
 ${1:Name} = models.BooleanField(${2:Options})
@@ -332,7 +332,7 @@ class ${1:model}(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	${2:name} = models.CharField(max_length=${3:Value})
 	${4:fields...}
-	
+
 	def __str__(self):
 		return str(self.${2//$0/})
 
@@ -366,12 +366,12 @@ $0
 endsnippet
 
 snippet adminClass3 "Django Admin"
-@register(${1:Model})                                                                
-class ${1//$0/}Admin(admin.ModelAdmin):                                             
+@register(${1:Model})
+class ${1//$0/}Admin(admin.ModelAdmin):
 	# icon_name = 'name icon'
 	list_display = ('${2:field}', $0)
-	# fields = []                    
-	# readonly_fields = ()                              
+	# fields = []
+	# readonly_fields = ()
 	# search_fields = []
 $0
 endsnippet
@@ -382,7 +382,7 @@ endsnippet
 snippet serializerClass3 "Django Serializer"
 class ${1:Name}Serializer(serializers.ModelSerializer):
 
-	class Meta:                                                                  
+	class Meta:
 		model = ${1//$0/}
 		fields = [${2:Fields}]
 endsnippet
@@ -432,7 +432,7 @@ snippet def3 "Django Functions Simple"
 def ${1:Name}(${2:variables}):
 	${3:pass}
 endsnippet
-	
+
 
 # }}}
 
@@ -470,7 +470,7 @@ endsnippet
 
 snippet from3 "From and Alias py3"
 from ${1:Library} import ${2:Module} as ${3:Alias}
-endsnippet	
+endsnippet
 
 # }}}
 
