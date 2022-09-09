@@ -1,23 +1,16 @@
-snippet snfolding "Snippet Folding Order"
-# ${1:NameFolding} {{{
-$0
-# }}}
-endsnippet
-
-snippet snvar "Snippet Input Variable" i
+snippet snvar "Snippet Input Variable"
 ${${1:Number}:${2:Name}}
 endsnippet
 
-snippet snmirror "Snippet Input Mirror Variable" i
-${${1:Number}//$0/}
+snippet snmirror "Snippet Input Mirror Variable"
+${${1:Number}///}
 endsnippet
 
-snippet sniper "Snippet Sniper"
+snippet snpt "Snippet Sniper"
 snippet ${1:Name} "${2:Description}"
-${4:Content}
+${4:Template}
 ${3:endsnippet}
 endsnippet
-	
 
 	
 
