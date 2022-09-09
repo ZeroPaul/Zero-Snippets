@@ -1,0 +1,37 @@
+# Django Templates
+
+snippet dj:load "Django Templates Load"
+{% load ${1:static} %}
+endsnippet
+
+snippet dj:extends "Django Templates Extends"
+{% extends "${1:NameApp}/${2:base.html}" %}
+endsnippet
+
+snippet dj:include "Django Templates Include"
+{% include "${1:NameTemplate}.html" with page=${2:Name}%}
+endsnippet
+
+snippet dj:block "Django Templates Block"
+{% block $1 %}
+	$2
+{% endblock %}
+endsnippet
+
+snippet dj:if "Django Templates If"
+{% if $1%}
+	$2
+{% endif %}
+$0
+endsnippet
+
+snippet dj:for "Django Templates For"
+{% for $1 in $2 %}
+	$3
+{% endfor %}
+endsnippet
+
+snippet dj:tag "Django Templates Tag"
+{{ ${1:Content} }}
+endsnippet
+
